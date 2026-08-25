@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "kairos.day-in-history",
+  "name": "This Day in History",
+  "version": "1.0.0",
+  "author": "kairos",
+  "license": "MIT",
+  "description": "Shows a random historical event that happened on today's date, from Wikipedia's free On This Day feed",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "This Day in History",
+    "description": "A random historical event that happened on today's date, from Wikipedia",
+    "category": "Info",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
