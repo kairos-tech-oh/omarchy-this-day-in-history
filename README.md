@@ -18,8 +18,10 @@ line](docs/screenshot.png)
 - One click shows a random event from today's date in history
 - "Another fact" picks a different event from the same day, instantly, with
   no extra network request
-- Fetches at most once per calendar day (plus manual "Reload"), so it stays
-  well within any reasonable use of a free public API
+- Fetches once per calendar day, plus manual "Reload", so it stays well
+  within any reasonable use of a free public API. Requests are floored at one
+  a minute however they are triggered, and a failed fetch backs off for 30
+  minutes rather than retrying every 10
 - No local state, no cache, no files written anywhere - nothing to clean up
 
 ## Use
@@ -28,7 +30,7 @@ Left-click the bar widget to open the panel.
 
 | Control | Result |
 | --- | --- |
-| **Reload** | Fetch today's events now |
+| **Reload** | Fetch today's events now (at most once a minute; a click inside that window leaves the current fact on screen) |
 | **Another fact** | Show a different event already fetched for today |
 | **Try Again** | Retry after a failed fetch |
 
@@ -40,9 +42,16 @@ free public endpoint from the Wikimedia Foundation that needs no API key or
 account. Only the month and day are sent - nothing else about you or your
 system.
 
+The request goes to that one hardcoded HTTPS host and nowhere else: redirects
+are not followed and non-HTTPS schemes are refused, so a reply cannot move the
+request to another host, to a loopback or private address, or to another
+scheme. The request carries no authentication and no identifier of any kind -
+just a User-Agent and today's month and day.
+
 The response is capped at 3 MiB and the parsed event list at 300 items,
 regardless of what the endpoint returns; both bounds are enforced before the
-response is held in memory, not after. Every event's text is stripped of
+response is held in memory, not after, and a body that hits the ceiling is
+refused rather than parsed for whatever prefix still happens to be valid. Every event's text is stripped of
 markup-significant and control characters before it is stored or displayed,
 and the plugin's own panel renders every string as plain text. A descriptive
 User-Agent identifying this plugin and linking to its repository is sent with
