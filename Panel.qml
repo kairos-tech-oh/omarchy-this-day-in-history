@@ -159,7 +159,7 @@ Panel {
     eventsProcess.command = root.cappedCurl(
       "https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/" + today.mm + "/" + today.dd,
       root.eventsCapBytes, 15,
-      ["-A", "kairos-day-in-history/1.0 (https://github.com/kairos-tech-oh/omarchy-day-in-history-plugin)"])
+      ["-A", "kairos-day-in-history/1.0 (https://github.com/kairos-tech-oh/omarchy-this-day-in-history)"])
     eventsProcess.running = true
   }
 
