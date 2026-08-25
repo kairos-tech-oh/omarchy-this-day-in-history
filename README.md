@@ -1,8 +1,17 @@
 # This Day in History for Omarchy
 
-A bar widget: a bookmark icon (🔖) that, when clicked, opens a panel showing
+A bar widget: a bookmark icon that, when clicked, opens a panel showing
 a random historical event that happened on today's calendar date. Facts come
 from Wikipedia's free, key-free "On This Day" feed.
+
+The icon is the Nerd Font `nf-fa-bookmark` glyph (U+F02E), not the Unicode
+🔖 emoji. A color-emoji font would render that codepoint in fixed colors
+regardless of theme, while the Nerd Font glyph is plain outline artwork that
+inherits the bar's foreground color like every other icon in it.
+
+![The This Day in History panel, open, showing an event from 1939 with Reload
+and "Another fact" controls and a Wikipedia CC BY-SA 4.0 attribution
+line](docs/screenshot.png)
 
 ## Highlights
 
@@ -51,7 +60,7 @@ CC BY-SA content fetched at runtime.
 ## Install
 
 ```sh
-omarchy plugin add https://github.com/kairos-tech-oh/omarchy-day-in-history-plugin.git --enable
+omarchy plugin add https://github.com/kairos-tech-oh/omarchy-this-day-in-history.git --enable
 ```
 
 The shell normally picks up the plugin immediately. If the widget doesn't
@@ -86,7 +95,7 @@ packages, background services, or daemons are required.
 
 ## Development
 
-The three files that make up this plugin:
+The three files that make up the plugin itself:
 
 | File | Purpose |
 | --- | --- |

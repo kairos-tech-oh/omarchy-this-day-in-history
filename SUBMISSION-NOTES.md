@@ -19,7 +19,7 @@ checklist, so that step is left to the repository owner.
 
 The repository referenced by the README install command and the Wikipedia
 User-Agent in `Panel.qml` is
-`https://github.com/kairos-tech-oh/omarchy-day-in-history-plugin`. If the
+`https://github.com/kairos-tech-oh/omarchy-this-day-in-history`. If the
 repository is ever renamed or moved, the User-Agent has to move with it --
 Wikimedia's API etiquette expects it to identify the application with a
 working contact/link.
