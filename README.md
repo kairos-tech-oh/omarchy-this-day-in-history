@@ -104,13 +104,28 @@ packages, background services, or daemons are required.
 
 ## Development
 
-The three files that make up the plugin itself:
+The files that make up the plugin itself:
 
 | File | Purpose |
 | --- | --- |
 | `manifest.json` | Plugin metadata |
 | `BarWidget.qml` | Thin bar-bound button; forwards `bar`/`settings` into the panel |
-| `Panel.qml` | All logic: fetching, parsing, sanitizing, random selection, and the popup UI |
+| `Panel.qml` | Fetching, scheduling, and the popup UI |
+| `HistoryLogic.js` | Pure logic: endpoint building, curl command, byte-capped parsing, event filtering, sanitising, random selection |
+
+`tools/run-checks.sh` runs every check:
+
+- `tools/check-logic.js` unit-tests `HistoryLogic.js` under Node: markup and control-character
+  stripping, the byte cap measured in UTF-8 bytes rather than UTF-16 units, refusal of
+  truncated bodies, endpoint building, event filtering (null elements, missing or
+  out-of-range years, the count cap), the curl command's flags, and that the next fact is
+  never the current one.
+- `tools/check-qml-engine.qml` runs the same library under Qt's V4 engine, which is what
+  omarchy-shell uses. It reports through its exit code: 0 is a pass, anything else names
+  the failing check.
+- `tools/check-qml.py` checks QML structure that lint cannot see.
+- `tools/check-conventions.sh` fails on an unqualified `Color`, a bare animation duration,
+  or a dynamic `Text` without `textFormat`.
 
 Changes inside an installed plugin directory normally hot-reload. Restart
 the shell if a QML component remains cached:

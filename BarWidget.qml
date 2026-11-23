@@ -1,6 +1,7 @@
 import QtQuick
 import qs.Commons
 import qs.Ui
+import "HistoryLogic.js" as Logic
 
 BarWidget {
   id: root
@@ -70,18 +71,8 @@ BarWidget {
   // colors regardless of theme, while a Nerd Font glyph is plain outline
   // artwork that inherits the bar's foreground color like every other icon
   // in it (same convention every other installed widget here uses).
-  function barSafe(value) {
-    var input = String(value === undefined || value === null ? "" : value)
-    var out = ""
-    for (var i = 0; i < input.length && out.length < 200; i++) {
-      var code = input.charCodeAt(i)
-      var ch = input.charAt(i)
-      if (code < 32 || code === 127) { out += " "; continue }
-      if (ch === "<" || ch === ">" || ch === "&") { out += " "; continue }
-      out += ch
-    }
-    return out.trim()
-  }
+  function barSafe(value) { return Logic.barSafe(value) }
+
 
   WidgetButton {
     id: button
